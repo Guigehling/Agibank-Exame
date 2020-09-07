@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Builder
 @Getter
 @Setter
-public class Salesman {
+public class Seller {
 
     private String CPF;
     private String Name;
