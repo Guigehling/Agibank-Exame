@@ -9,10 +9,10 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @Builder
-public class ImportedFile {
+public class FileImportedContent {
 
     private ArrayList<Customer> customerList;
-    private ArrayList<Salesman> salesmenList;
+    private ArrayList<Seller> sellersList;
     private ArrayList<Sale> saleList;
 
 }

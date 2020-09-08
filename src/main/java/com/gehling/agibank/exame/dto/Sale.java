@@ -13,13 +13,13 @@ import java.util.ArrayList;
 public class Sale {
 
     private Long idSale;
-    private ArrayList<ItemSold> itemSold;
-    private Salesman salesman;
+    private ArrayList<Item> item;
+    private Seller seller;
 
     public BigDecimal getAmount() {
         BigDecimal saleAmount = BigDecimal.ZERO;
-        for (ItemSold itemSold : this.itemSold) {
-            saleAmount = saleAmount.add(itemSold.getPrice().multiply(itemSold.getQuantity()));
+        for (Item item : this.item) {
+            saleAmount = saleAmount.add(item.getPrice().multiply(item.getQuantity()));
         }
         return saleAmount;
     }

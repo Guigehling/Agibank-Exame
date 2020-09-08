@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Builder
 @Getter
 @Setter
-public class ItemSold {
+public class Item {
 
     private Long idItem;
     private BigDecimal quantity;
