@@ -22,6 +22,7 @@ public class ReadingTaskService {
     private FileProcessService fileProcessService;
 
     public void runProcess() throws ProcessFileException {
+        log.debug("Start New Job!");
         ArrayList<File> filesToProcess = getFilesToProcess();
         filesToProcess.forEach(file -> {
             try {
@@ -33,11 +34,12 @@ public class ReadingTaskService {
                 log.error(e.getMessage(), e);
             }
         });
+        log.debug("Job Completed!");
     }
 
     private ArrayList<File> getFilesToProcess() throws ProcessFileException {
         File directory = this.fileManipulationService.identifyDirectory();
-        return this.fileManipulationService.findValidFiles(directory);
+        return this.fileManipulationService.findValidFiles(directory.list());
     }
 
 }

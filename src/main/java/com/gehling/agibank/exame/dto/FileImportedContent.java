@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class FileImportedContent {
 
     private ArrayList<Customer> customerList;
-    private ArrayList<Seller> salesmenList;
+    private ArrayList<Seller> sellersList;
     private ArrayList<Sale> saleList;
 
 }

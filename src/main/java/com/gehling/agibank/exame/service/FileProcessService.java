@@ -6,7 +6,9 @@ import com.gehling.agibank.exame.dto.Sale;
 import com.gehling.agibank.exame.dto.Seller;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 import static java.util.Comparator.comparing;
@@ -17,7 +19,7 @@ public class FileProcessService {
     public FileExportContent mountInfoToExport(FileImportedContent fileImportedContent) {
         return FileExportContent.builder()
                 .customerAmount(fileImportedContent.getCustomerList().size())
-                .sellersAmount(fileImportedContent.getSalesmenList().size())
+                .sellersAmount(fileImportedContent.getSellersList().size())
                 .moreExpansiveSale(getMoreExpensiveSale(fileImportedContent.getSaleList()))
                 .worstSeller(identifyTheWorstSeller(fileImportedContent))
                 .build();
@@ -28,16 +30,17 @@ public class FileProcessService {
         return moreExpansiveSale.orElse(null);
     }
 
-    private Seller identifyTheWorstSeller(FileImportedContent fileImportedContent) {
-        fileImportedContent.getSalesmenList().forEach(salesman -> {
+    public Seller identifyTheWorstSeller(FileImportedContent fileImportedContent) {
+        fileImportedContent.getSellersList().forEach(seller -> {
             fileImportedContent.getSaleList().forEach(sale -> {
-                if (sale.getSeller().getCPF().equals(salesman.getCPF())) {
-                    salesman.setValueSold(salesman.getValueSold().add(sale.getAmount()));
+                if (sale.getSeller().getCPF().equals(seller.getCPF())) {
+                    if (Objects.isNull(seller.getValueSold())) seller.setValueSold(BigDecimal.ZERO);
+                    seller.setValueSold(seller.getValueSold().add(sale.getAmount()));
                 }
             });
         });
 
-        Optional<Seller> salesmanOptional = fileImportedContent.getSalesmenList().stream().min(comparing(Seller::getValueSold));
+        Optional<Seller> salesmanOptional = fileImportedContent.getSellersList().stream().min(comparing(Seller::getValueSold));
         return salesmanOptional.orElse(null);
     }
 

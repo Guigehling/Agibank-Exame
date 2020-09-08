@@ -41,13 +41,13 @@ public class FileManipulationService {
         if (!directory.exists()) directory.mkdir();
     }
 
-    public ArrayList<File> findValidFiles(File directory) {
-        ArrayList<File> files = new ArrayList<>();
-        for (String fileName : Objects.requireNonNull(directory.list())) {
+    public ArrayList<File> findValidFiles(String[] directoryFiles) {
+        ArrayList<File> validFiles = new ArrayList<>();
+        for (String fileName : Objects.requireNonNull(directoryFiles)) {
             if (fileName.toUpperCase().matches(DEAFULT_FILE_EXTENSION_REGEX))
-                files.add(new File(this.source + fileName));
+                validFiles.add(new File(this.source + fileName));
         }
-        return files;
+        return validFiles;
     }
 
     public void writeResultFile(FileExportContent fileExportContent, String orinigalFileName) throws ProcessFileException {

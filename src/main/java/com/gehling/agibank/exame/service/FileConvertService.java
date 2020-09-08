@@ -75,7 +75,7 @@ public class FileConvertService {
 
             return FileImportedContent.builder()
                     .customerList(customers)
-                    .salesmenList(salesmens)
+                    .sellersList(salesmens)
                     .saleList(sales)
                     .build();
         } catch (Exception e) {
